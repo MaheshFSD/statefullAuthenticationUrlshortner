@@ -12,7 +12,7 @@ const PORT = 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.set('view engine', ejs);
+app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 
 app.use('/', urlRoute);
@@ -24,7 +24,6 @@ connectToMongoDb(process.env.MONGODBURL)
     app.listen(PORT, () => console.log('Server started on ',PORT))
 })
 .catch(err => console.log('Db connection failed ----', err));
-
 
 
 
