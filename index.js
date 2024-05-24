@@ -3,7 +3,8 @@ const {connectToMongoDb} = require('./configs/connection.js');
 const dotenv = require('dotenv')
 const ejs = require('ejs');
 const path = require('path');
-const urlRoute = require('./routes/url.route.js')
+const userRoute = require('./routes/user.route.js')
+const urlRoute = require('./routes/user.route.js')
 
 const app = express();
 
@@ -15,7 +16,8 @@ app.use(express.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 
-app.use('/', urlRoute);
+app.use('/', userRoute);
+app.use('/url', urlRoute);
 
 
 connectToMongoDb(process.env.MONGODBURL)
