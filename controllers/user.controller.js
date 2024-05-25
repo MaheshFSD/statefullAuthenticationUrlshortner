@@ -1,9 +1,10 @@
 const User = require('../models/user.model');
 const {v4: uuidv4} = require('uuid');
 const {setSessionId, getSessionIdUser} = require('../service/auth');
+
 const homePage = (req,res) => {
     // res.send("Helloooooo");
-    res.render('login');
+    res.render('home');
 }
 
 const signup = async (req, res) => {
@@ -13,14 +14,15 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
     const {email, password} = req.body;
     const sessionId = uuidv4();
-    console.log(sessionId, ' ------ sessionId ----- ');
     // skipping some validation
     const user = User.findOne({email});
     if(!user) return res.render('/login');
     // check password is correct or not 
     setSessionId(sessionId, user);
     res.cookie('uid', sessionId);
+    console.log('call from signin last -------------- ');
     res.redirect('/');
+    // res.render('home');
 }
 
 const login = async (req, res) => {

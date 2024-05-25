@@ -5,6 +5,8 @@ const ejs = require('ejs');
 const path = require('path');
 const userRoute = require('./routes/user.route.js')
 const urlRoute = require('./routes/user.route.js')
+const {restrictRouteToLoggedInUserOnly} = require('./middlewares/auth.js');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -15,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
+app.use(cookieParser());
 
 app.use('/', userRoute);
 app.use('/url', urlRoute);
