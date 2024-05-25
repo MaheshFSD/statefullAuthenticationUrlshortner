@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 const {v4: uuidv4} = require('uuid');
-
+const {setSessionId, getSessionIdUser} = require('../service/auth');
 const homePage = (req,res) => {
     // res.send("Helloooooo");
     res.render('login');
@@ -18,6 +18,8 @@ const signin = async (req, res) => {
     const user = User.findOne({email});
     if(!user) return res.render('/login');
     // check password is correct or not 
+    setSessionId(sessionId, user);
+    res.cookie('uid', sessionId);
     res.redirect('/');
 }
 
