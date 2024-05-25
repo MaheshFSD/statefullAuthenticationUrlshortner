@@ -9,9 +9,3 @@ router.post('/signin', signin)
 router.get('/login', login)
 
 module.exports = router;
-
-
-
-
-
-

@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const {v4: uuidv4} = require('uuid');
 
 const homePage = (req,res) => {
     // res.send("Helloooooo");
@@ -11,10 +12,13 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
     const {email, password} = req.body;
+    const sessionId = uuidv4();
+    console.log(sessionId, ' ------ sessionId ----- ');
     // skipping some validation
     const user = User.findOne({email});
     if(!user) return res.render('/login');
-    res.render('home');
+    // check password is correct or not 
+    res.redirect('/');
 }
 
 const login = async (req, res) => {
